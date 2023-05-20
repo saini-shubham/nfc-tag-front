@@ -2,12 +2,14 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Scanner from '../components/Scanner/Scanner';
 import { ActionsContext } from '../context';
+import ScanDone from './ScanDone';
+import TagRegister from './TagRegister';
 
 const Scan = () => {
     const [message, setMessage] = useState('');
     const [serialNumber, setSerialNumber] = useState('');
     const { actions, setActions} = useContext(ActionsContext);
-
+    const[userType,setUserType] =useState("scanner")
     const scan = useCallback(async() => {
         if ('NDEFReader' in window) { 
             try {
@@ -54,12 +56,14 @@ const Scan = () => {
     useEffect(() => {
         scan();
     }, [scan]);
-
+    
     return(
         <>
             {actions.scan === 'scanned' ?  
             <div>
                 <p>Serial Number: {serialNumber}</p>
+                {userType ==="scanner" && <ScanDone></ScanDone>}
+                {userType ==="tagger" && <TagRegister tagId={serialNumber}></TagRegister>}
                 {/* <p>Message: {message}</p> */}
             </div>
             : <Scanner status={actions.scan}></Scanner> }

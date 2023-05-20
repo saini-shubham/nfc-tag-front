@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, CardTitle, Button, CardSubtitle } from 'reactstrap';
 import ComponentCard from '../components/ComponentCard';
+import { useNavigate } from 'react-router-dom';
 
 
 const UserDetails = () => {
@@ -81,11 +82,12 @@ const UserDetails = () => {
       icon: 'bi-person-check',
     },
   ];
+  const navigate = useNavigate()
   return (
     <Row>
     <Col sm="6" lg="6">
     <ComponentCard
-        title="Xtreme React Admin Pro Version"
+        title="Create New User"
         // subtitle={
         //   <p>
         //     5 premium and highly customizable demo variations included in the package, with React
@@ -99,8 +101,9 @@ const UserDetails = () => {
             <div className="mt-3">
               <Button
                 color="primary"
-                href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
-                target="_blank"
+                //href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
+                //target="_blank"
+                onClick={()=>navigate('/users/createUser')}
               >
                 Create User
               </Button>
@@ -112,7 +115,7 @@ const UserDetails = () => {
     </Col>
     <Col sm="6" lg="6">
     <ComponentCard
-        title="Xtreme React Admin Pro Version"
+        title="User Details"
         // subtitle={
         //   <p>
         //     5 premium and highly customizable demo variations included in the package, with React
@@ -126,8 +129,7 @@ const UserDetails = () => {
             <div className="mt-3">
               <Button
                 color="primary"
-                href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
-                target="_blank"
+                onClick={()=>navigate('/users/details')}
               >
                List of Users
               </Button>

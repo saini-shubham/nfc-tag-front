@@ -76,7 +76,7 @@ const Starter = () => {
       <Row>
       <Col sm="6" lg="6">
       <ComponentCard
-          title="Xtreme React Admin Pro Version"
+          title="Scan Tag"
           // subtitle={
           //   <p>
           //     5 premium and highly customizable demo variations included in the package, with React
@@ -113,7 +113,7 @@ const Starter = () => {
       </Col>
       <Col sm="6" lg="6">
       <ComponentCard
-          title="Xtreme React Admin Pro Version"
+          title="Register New Tag"
           // subtitle={
           //   <p>
           //     5 premium and highly customizable demo variations included in the package, with React
@@ -129,8 +129,9 @@ const Starter = () => {
                   color="primary"
                  // href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
                   //target="_blank"
+                 
                   //onClick={()=>navigate('/tags/register')}
-                  onClick={()=>navigate('/tags/register')}
+                  onClick={()=>onHandleAction({scan: 'scanning', write: null})}
                 >
                  Register
                 </Button>

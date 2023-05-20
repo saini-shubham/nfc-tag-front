@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import UserDetails from "../views/UserDetails.js";
 import TagDetails from "../views/TagDetails.js";
 import TagRegister from "../components/TagRegister.js";
+import CreateUser from "../components/CreateUser.js";
+import UserListDetails from "../components/UserListDetails.js";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -30,7 +32,12 @@ const ThemeRoutes = [
       { path: "/", element: <Navigate to="/starter" /> },
       { path: "/starter", exact: true, element: <Starter /> },
       { path: "/about", exact: true, element: <About /> },
-      { path: "/users", exact: true, element: <UserDetails /> },
+      { path: "/users", exact: true, children:[
+        { path: "", exact: true, element: <UserDetails /> },
+        { path: "createUser", exact: true, element: <CreateUser></CreateUser> },
+        { path: "details", exact: true, element: <UserListDetails></UserListDetails>},
+      ] },
+      
       { path: "/tags", exact: true,children:[
         {path:'',element:<TagDetails />},
         { path: "register", exact: true, element: <TagRegister/> }

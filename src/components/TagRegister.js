@@ -1,34 +1,15 @@
-// import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
-
-// const TagRegister = () => {
-//   return (
-//     <>
-//       <Card>
-//         <CardBody>
-//           <CardTitle tag="h5">Register Tag</CardTitle>
-//           <CardSubtitle className="mb-2 text-muted" tag="h6">
-//             Register Tag
-//           </CardSubtitle>
-
-//         </CardBody>
-//       </Card>
-//     </>
-//   );
-// };
-
-// export default TagRegister;
 
 import React, { useState } from "react";
 import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
 import ComponentCard from "./ComponentCard";
 import { useSelector, useDispatch } from "react-redux";
-const TagRegister = () => {
+const TagRegister = (props) => {
   const dispatch = useDispatch();
 
   const[tagID,setTagId]=useState();
   const [formData, setFormData] = useState({
-    tagId: "",
+    tagId: props.tagID,
     userId: "",
     name: "",
     houseNo: "",
