@@ -4,6 +4,7 @@ import Scanner from '../components/Scanner/Scanner';
 import { ActionsContext } from '../context';
 import ScanDone from './ScanDone';
 import TagRegister from './TagRegister';
+import { useNavigate } from 'react-router-dom';
 
 const Scan = () => {
     const [message, setMessage] = useState('');
@@ -35,7 +36,7 @@ const Scan = () => {
             };
         }
     },[setActions]);
-
+    const navigate = useNavigate()
     const onReading = ({message, serialNumber}) => {
         setSerialNumber(serialNumber);
         for (const record of message.records) {
@@ -59,8 +60,8 @@ const Scan = () => {
     
     return(
         <>
-            {actions.scan === 'scanned' ?  
-                     <TagRegister tagId={serialNumber}></TagRegister>
+            {actions.scan === 'scanned' ?  navigate('/tags/register')
+                    //  <TagRegister tagId={serialNumber}></TagRegister>
             // <div>
             //     <p>Serial Number: {serialNumber}</p>
             //     {userType ==="scanner" && <ScanDone></ScanDone>}
