@@ -60,14 +60,15 @@ const Scan = () => {
     return(
         <>
             {actions.scan === 'scanned' ?  
-            <div>
-                <p>Serial Number: {serialNumber}</p>
-                {userType ==="scanner" && <ScanDone></ScanDone>}
-                {userType ==="tagger" && <TagRegister tagId={serialNumber}></TagRegister>}
-                {/* <p>Message: {message}</p> */}
-            </div>
+                     <TagRegister tagId={serialNumber}></TagRegister>
+            // <div>
+            //     <p>Serial Number: {serialNumber}</p>
+            //     {userType ==="scanner" && <ScanDone></ScanDone>}
+            //     {userType ==="tagger" && <TagRegister tagId={serialNumber}></TagRegister>}
+            //     {/* <p>Message: {message}</p> */}
+            // </div>
             : <Scanner status={actions.scan}></Scanner> }
-            {actions.scan === 'scanned' && userType ==="tagger" &&  <TagRegister tagId={serialNumber}></TagRegister>}
+            {/* {actions.scan === 'scanned' && userType ==="tagger" &&  <TagRegister tagId={serialNumber}></TagRegister>} */}
         </>
     );
 };
