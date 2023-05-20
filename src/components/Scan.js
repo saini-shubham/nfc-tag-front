@@ -34,21 +34,21 @@ const Scan = () => {
         }
     },[setActions]);
 
-    const onReading = ({message, serialNumber}) => {
+    const onReading = ({serialNumber}) => {
         setSerialNumber(serialNumber);
-        for (const record of message.records) {
-            switch (record.recordType) {
-                case "text":
-                    const textDecoder = new TextDecoder(record.encoding);
-                    setMessage(textDecoder.decode(record.data));
-                    break;
-                case "url":
-                    // TODO: Read URL record with record data.
-                    break;
-                default:
-                    // TODO: Handle other records with record data.
-                }
-        }
+        // for (const record of message.records) {
+        //     switch (record.recordType) {
+        //         case "text":
+        //             const textDecoder = new TextDecoder(record.encoding);
+        //             setMessage(textDecoder.decode(record.data));
+        //             break;
+        //         case "url":
+        //             // TODO: Read URL record with record data.
+        //             break;
+        //         default:
+        //             // TODO: Handle other records with record data.
+        //         }
+        // }
     };
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Scan = () => {
             {actions.scan === 'scanned' ?  
             <div>
                 <p>Serial Number: {serialNumber}</p>
-                <p>Message: {message}</p>
+                {/* <p>Message: {message}</p> */}
             </div>
             : <Scanner status={actions.scan}></Scanner> }
         </>
