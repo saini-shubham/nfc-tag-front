@@ -60,7 +60,7 @@ const Scan = () => {
             {actions.scan === 'scanned' ?  
             <div>
                 <p>Serial Number: {serialNumber}</p>
-                <p>Message: {message}</p>
+                {/* <p>Message: {message}</p> */}
             </div>
             : <Scanner status={actions.scan}></Scanner> }
         </>
