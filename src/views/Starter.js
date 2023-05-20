@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { tagAction } from "../store/tagSlice";
 import Scan from "../components/Scan";
 import { useEffect, useState } from "react";
-
+import { ActionsContext } from '../context';
 const BlogData = [
   {
     image: bg1,
@@ -55,11 +55,20 @@ const Starter = () => {
   const dispatch = useDispatch();
   const[tagScanStatus,setTagScanStatus]=useState(false)
   const tagStatus = useSelector((state)=>state.tagDetails.tagScanStatus);
+  
+  
+  const [actions, setActions] = useState(null);
+  const {scan, write} = actions || {};
+  const actionsValue = {actions,setActions};
+  const onHandleAction = (actions) =>{
+    setActions({...actions});
+  }
+
   useEffect(()=>{
-    console.log('hi')
     console.log(tagStatus)
     setTagScanStatus(tagStatus)
   },[tagStatus])
+
   return (
     <div>
       {/***Top Cards***/}
@@ -79,14 +88,23 @@ const Starter = () => {
           <Row>
             <Col lg="8">
               <div className="mt-3">
-                <Button
+                {/* <Button
                   color="primary"
                   //href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
                   //target="_blank"
                   onClick={()=> dispatch(tagAction.setTagScanStatus(true))}
                 >
                   Scan
+                </Button> */}
+                 <Button
+                  color="primary"
+                  //href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
+                  //target="_blank"
+                  onClick={()=>onHandleAction({scan: 'scanning', write: null})}
+                >
+                  Scan
                 </Button>
+                 {/* <button onClick={()=>onHandleAction({scan: 'scanning', write: null})} className="btn">Scan</button> */}
               </div>
             </Col>
             
@@ -194,7 +212,9 @@ const Starter = () => {
           </Col>
         ))}
       </Row>
-      {tagScanStatus && <Scan></Scan>}
+      <ActionsContext.Provider value={actionsValue}>
+          {scan && <Scan/>}
+        </ActionsContext.Provider>
     </div>
   );
 };
