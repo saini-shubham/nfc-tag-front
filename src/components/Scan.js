@@ -37,7 +37,7 @@ const Scan = () => {
     },[actions]);
 
     const onReading = ({message, serialNumber}) => {
-        alrert(serialNumber)
+        alert(serialNumber)
         setSerialNumber(serialNumber);
         // for (const record of message.records) {
         //     switch (record.recordType) {
