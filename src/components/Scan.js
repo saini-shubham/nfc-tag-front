@@ -67,6 +67,7 @@ const Scan = () => {
                 {/* <p>Message: {message}</p> */}
             </div>
             : <Scanner status={actions.scan}></Scanner> }
+            {actions.scan === 'scanned' && userType ==="tagger" && <ScanDone></ScanDone>}
         </>
     );
 };
