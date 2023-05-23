@@ -60,14 +60,17 @@ const Scan = () => {
     
     return(
         <>
-            {actions.scan === 'scanned' ?  navigate('/tags/register')
+            {/* {actions.scan === 'scanned' ?  navigate('/tags/register') */}
+            {actions.scan === 'scanned' ?
                     //  <TagRegister tagId={serialNumber}></TagRegister>
-            // <div>
-            //     <p>Serial Number: {serialNumber}</p>
-            //     {userType ==="scanner" && <ScanDone></ScanDone>}
-            //     {userType ==="tagger" && <TagRegister tagId={serialNumber}></TagRegister>}
-            //     {/* <p>Message: {message}</p> */}
-            // </div>
+            <div>
+                {/* <p>Serial Number: {serialNumber}</p> */}
+                {userType ==="scanner" && navigate('/tags/scan')}
+                {userType ==="tagger" && navigate('/tags/register:serialNumber')}
+                {userType ==="admin" && navigate('/tags/register:serialNumber')}
+                {userType ==="superAdmin" && navigate('/tags/register:serialNumber')}
+                {/* <p>Message: {message}</p> */}
+            </div>
             : <Scanner status={actions.scan}></Scanner> }
             {/* {actions.scan === 'scanned' && userType ==="tagger" &&  <TagRegister tagId={serialNumber}></TagRegister>} */}
         </>

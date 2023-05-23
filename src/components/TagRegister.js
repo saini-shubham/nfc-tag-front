@@ -4,12 +4,13 @@ import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
 import ComponentCard from "./ComponentCard";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 const TagRegister = (props) => {
   const dispatch = useDispatch();
-
-  const[tagID,setTagId]=useState();
+  const {tagId }= useParams()
+ // const[tagID,setTagId]=useState();
   const [formData, setFormData] = useState({
-    tagId: props.tagID,
+    tagId: tagId,
     userId: "",
     name: "",
     houseNo: "",
