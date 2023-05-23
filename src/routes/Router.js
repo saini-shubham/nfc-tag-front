@@ -41,7 +41,7 @@ const ThemeRoutes = [
       
       { path: "/tags", exact: true,children:[
         {path:'',element:<TagDetails />},
-        { path: "scan", exact: true, element: <ScanDone></ScanDone> },
+        { path: "scan", exact: true, element: <ScanDone/> },
         { path: "register:tagId", exact: true, element: <TagRegister/> }
       ] },
       // { path: "/alerts", exact: true, element: <Alerts /> },
