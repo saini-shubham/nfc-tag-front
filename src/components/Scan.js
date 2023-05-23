@@ -10,7 +10,7 @@ const Scan = () => {
     const [message, setMessage] = useState('');
     const [serialNumber, setSerialNumber] = useState('');
     const { actions, setActions} = useContext(ActionsContext);
-    const[userType,setUserType] =useState("tagger")
+    const[userType,setUserType] =useState("scanner")
     const scan = useCallback(async() => {
         if ('NDEFReader' in window) { 
             try {
