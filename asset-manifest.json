@@ -3,13 +3,13 @@
     "main.css": "/nfc-tag-front/static/css/main.2c011b4d.chunk.css",
     "main.js": "/nfc-tag-front/static/js/main.9947015c.chunk.js",
     "main.js.map": "/nfc-tag-front/static/js/main.9947015c.chunk.js.map",
-    "runtime-main.js": "/nfc-tag-front/static/js/runtime-main.4f5da089.js",
-    "runtime-main.js.map": "/nfc-tag-front/static/js/runtime-main.4f5da089.js.map",
+    "runtime-main.js": "/nfc-tag-front/static/js/runtime-main.f5bf1e51.js",
+    "runtime-main.js.map": "/nfc-tag-front/static/js/runtime-main.f5bf1e51.js.map",
     "static/js/2.7d33bc54.chunk.js": "/nfc-tag-front/static/js/2.7d33bc54.chunk.js",
     "static/js/2.7d33bc54.chunk.js.map": "/nfc-tag-front/static/js/2.7d33bc54.chunk.js.map",
     "static/css/3.a748594a.chunk.css": "/nfc-tag-front/static/css/3.a748594a.chunk.css",
-    "static/js/3.16c7158f.chunk.js": "/nfc-tag-front/static/js/3.16c7158f.chunk.js",
-    "static/js/3.16c7158f.chunk.js.map": "/nfc-tag-front/static/js/3.16c7158f.chunk.js.map",
+    "static/js/3.340df8bd.chunk.js": "/nfc-tag-front/static/js/3.340df8bd.chunk.js",
+    "static/js/3.340df8bd.chunk.js.map": "/nfc-tag-front/static/js/3.340df8bd.chunk.js.map",
     "static/js/4.547bc156.chunk.js": "/nfc-tag-front/static/js/4.547bc156.chunk.js",
     "static/js/4.547bc156.chunk.js.map": "/nfc-tag-front/static/js/4.547bc156.chunk.js.map",
     "static/js/5.98f72ff4.chunk.js": "/nfc-tag-front/static/js/5.98f72ff4.chunk.js",
@@ -54,7 +54,7 @@
     "static/media/xtremelogowhite.0acdceff.svg": "/nfc-tag-front/static/media/xtremelogowhite.0acdceff.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4f5da089.js",
+    "static/js/runtime-main.f5bf1e51.js",
     "static/js/2.7d33bc54.chunk.js",
     "static/css/main.2c011b4d.chunk.css",
     "static/js/main.9947015c.chunk.js"
