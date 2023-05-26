@@ -1,142 +1,5 @@
-// import React, { useState } from "react";
-// import {
-//   TextField,
-//   FormControl,
-//   InputLabel,
-//   Select,
-//   MenuItem,
-//   Button,
-//   makeStyles,
-// } from "@material-ui/core";
-// import ComponentCard from "./ComponentCard";
-
-// const useStyles = makeStyles((theme) => ({
-//   formControl: {
-//     marginBottom: theme.spacing(2),
-//     minWidth: 200,
-//   },
-//   button: {
-//     marginTop: theme.spacing(2),
-//   },
-// }));
-
-// const cities = ["City 1", "City 2", "City 3", "City 4", "City 5"];
-
-// const CreateUser = () => {
-//   const classes = useStyles();
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     aadhaarNumber: "",
-//     firmName: "",
-//     city: [],
-//     phoneNumber: "",
-//     userType: "",
-//   });
-
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleCityChange = (event) => {
-//     const { value } = event.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       city: value,
-//     }));
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault(); // Perform form submission or validation here
-//     console.log(formData);
-//   };
-
-//   return (
-//     <ComponentCard>
-//     <form onSubmit={handleSubmit}>
-//       <TextField
-//         label="Name"
-//         name="name"
-//         value={formData.name}
-//         onChange={handleChange}
-//         required
-//       />
-
-//       <TextField
-//         label="Aadhaar Number"
-//         name="aadhaarNumber"
-//         value={formData.aadhaarNumber}
-//         onChange={handleChange}
-//         required
-//       />
-
-//       <TextField
-//         label="Firm Name"
-//         name="firmName"
-//         value={formData.firmName}
-//         onChange={handleChange}
-//         required
-//       />
-
-//       <FormControl className={classes.formControl}>
-//         <InputLabel>City</InputLabel>
-//         <Select
-//           name="city"
-//           value={formData.city}
-//           onChange={handleCityChange}
-//           multiple
-//           required
-//         >
-//
-//           {cities.map((city) => (
-//             <MenuItem key={city} value={city}>
-//                            {city}
-//             </MenuItem>
-//           ))}
-//         </Select>
-//       </FormControl>
-
-//       <TextField
-//         label="Phone Number"
-//         name="phoneNumber"
-//         value={formData.phoneNumber}
-//         onChange={handleChange}
-//         required
-//       />
-
-//       <FormControl className={classes.formControl}>
-//         <InputLabel>User Type</InputLabel>
-//         <Select
-//           name="userType"
-//           value={formData.userType}
-//           onChange={handleChange}
-//           required
-//         >
-//           <MenuItem value="Type 1">Type 1</MenuItem>
-//           <MenuItem value="Type 2">Type 2</MenuItem>
-//           <MenuItem value="Type 3">Type 3</MenuItem>
-//         </Select>
-//       </FormControl>
-
-//       <Button
-//         variant="contained"
-//         color="primary"
-//         type="submit"
-//         className={classes.button}
-//       >
-//                Submit
-//       </Button>
-//     </form>
-//     </ComponentCard>
-//   );
-// };
-
-// export default CreateUser;
-
 import React, { useState } from "react";
+import userServices from "../services/userServices";
 import {
   TextField,
   FormControl,
@@ -148,12 +11,13 @@ import {
   Grid,
 } from "@material-ui/core";
 import ComponentCard from "./ComponentCard";
-
-const cities = ["City A", "City B", "City C", "City D"]; // Replace with your city options
+import {} from '../services/common'
+import Swal from "sweetalert2";
+const cities = ['Hisar','Sirsa','Pune','Delhi']; // Replace with your city options
 
 const CreateUser = () => {
   const [name, setName] = useState("");
-  const [aadhaarNumber, setAadhaarNumber] = useState("");
+  const [adhaarNumber, setAadhaarNumber] = useState("");
   const [firmName, setFirmName] = useState("");
   const [selectedCities, setSelectedCities] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -184,15 +48,35 @@ const CreateUser = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Perform form submission or validation logic here // You can access the form values using the state variables (name, aadhaarNumber, firmName, selectedCities, phoneNumber, userType)
-    console.log("Form submitted:", {
+   // e.preventDefault(); // Perform form submission or validation logic here // You can access the form values using the state variables (name, adhaarNumber, firmName, selectedCities, phoneNumber, userType)
+    // console.log("Form submitted:", {
+    //   name,
+    //   adhaarNumber,
+    //   firmName,
+    //   selectedCities,
+    //   phoneNumber,
+    //   userType,
+    // });
+    const formBody={
       name,
-      aadhaarNumber,
+      adhaarNumber,
       firmName,
       selectedCities,
       phoneNumber,
       userType,
-    });
+    }
+   
+      userServices.createUser(formBody).then((res)=>{
+        console.log(res)
+        Swal.fire({
+          icon: "success",
+          title: res.data.message,
+          text:  "user Id: "+res.data.userId+"-----"+"Password: "+res.data.password
+        });
+      }).catch((err)=>
+      //console.log(err.response.data)
+      Swal.fire("Adhar/Phone must be numbers")
+      )
   };
 
   return (
@@ -211,7 +95,7 @@ const CreateUser = () => {
           <Grid item xs={6}>
             <TextField
               label="Aadhaar Number"
-              value={aadhaarNumber}
+              value={adhaarNumber}
               onChange={handleAadhaarNumberChange}
               required
               fullWidth
@@ -257,8 +141,9 @@ const CreateUser = () => {
             <FormControl fullWidth required>
               <InputLabel fullWidth>User Type</InputLabel>
               <Select value={userType} onChange={handleUserTypeChange}>
-                <MenuItem value="Admin">Admin</MenuItem>
-                <MenuItem value="User">User</MenuItem>
+                <MenuItem value="admin">Admin</MenuItem>
+                <MenuItem value="tagger">Tagger</MenuItem>
+                <MenuItem value="scanner">Scanner</MenuItem>
               </Select>
             </FormControl>
           </Grid>

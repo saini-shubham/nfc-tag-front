@@ -1,84 +1,140 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useCallback, useState } from "react";
 import {
-  Container,
-  Paper,
-  Typography,
-  TextField,
   Button,
+  TextField,
+  Grid,
+  Container,
+  Typography,
+  Snackbar,
 } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundImage: 'url("/path/to/background-image.jpg")',
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-  },
-  formContainer: {
-    padding: theme.spacing(4),
-    maxWidth: 400,
-    width: "100%",
-  },
-  formTitle: {
-    marginBottom: theme.spacing(2),
-  },
-  formField: {
-    marginBottom: theme.spacing(2),
-  },
-  formButton: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
+import ComponentCard from "./ComponentCard";
+import { useNavigate } from "react-router-dom";
+import { Alert, Stack } from "@mui/material";
+import Swal from "sweetalert2";
 const Login = () => {
-  const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    // Perform login logic here
+  const validateForm = () => {
+    let formIsValid = true;
+    const newErrors = {};
+
+    if (!email) {
+      formIsValid = false;
+      newErrors.email = "Email is required";
+    }
+
+    if (!password) {
+      formIsValid = false;
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+    return formIsValid;
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateForm()) {
+      // Perform login logic here
+      const loginDetails = {
+        userId: email,
+        password,
+      };
+      onLogin(loginDetails);
+      console.log("Login successful");
+    }
+  };
+
+  const onLogin = useCallback(async (details) => {
+    try {
+      const response = await fetch(
+        // base_url +":7218/Authentication/Login",
+        "http://3.110.105.36/login",
+        {
+          method: "POST",
+          body: JSON.stringify(details),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 403 || response.status === 401) {
+        console.log("hiii");
+        Swal.fire({
+          icon: "error",
+          title: "Authentication Error",
+          text: "User not found",
+        });
+        //   <Snackbar  autoHideDuration={6000} >
+        //   <Alert variant="outlined" severity="error">
+        //     This is an error alert — check it out!
+        //   </Alert>
+        //  </Snackbar>
+      }
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log(data);
+       // const token = data.jsonContent;
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem('userId',data.userId);
+        sessionStorage.setItem('userType', data.userType);
+        navigate("/starter");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
-    <div className={classes.root}>
-      <Container>
-        <Paper elevation={3} className={classes.formContainer}>
-          <Typography variant="h5" component="h2" className={classes.formTitle}>
-            Login
-          </Typography>
-          <form onSubmit={handleLogin}>
-            <TextField
-              label="Email"
-              type="email"
-              variant="outlined"
-              fullWidth
-              className={classes.formField}
-              required
-            />
-            <TextField
-              label="Password"
-              type="password"
-              variant="outlined"
-              fullWidth
-              className={classes.formField}
-              required
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              className={classes.formButton}
-            >
-              Login
-            </Button>
-          </form>
-        </Paper>
+    <ComponentCard>
+      <Container maxWidth="sm">
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h4" align="center" gutterBottom>
+                Login
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Email"
+                //type="email"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={!!errors.email}
+                helperText={errors.email}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Password"
+                type="password"
+                fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={!!errors.password}
+                helperText={errors.password}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
+                Log In
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
       </Container>
-    </div>
+    </ComponentCard>
   );
 };
 

@@ -6,6 +6,8 @@ import TagRegister from "../components/TagRegister.js";
 import CreateUser from "../components/CreateUser.js";
 import UserListDetails from "../components/UserListDetails.js";
 import ScanDone from "../components/ScanDone.js";
+import Login from "../components/Login.js";
+import TagDetailsList from "../components/TagDetailsList.js";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -26,11 +28,20 @@ const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
 /*****Routes******/
 
 const ThemeRoutes = [
+    {
+      path:"/",
+      element:<Login></Login>
+    },
+    {
+      path:"logout",
+      element:<Login></Login>,
+      //action:
+    },
   {
     path: "/",
     element: <FullLayout />,
     children: [
-      { path: "/", element: <Navigate to="/starter" /> },
+      //{ path: "/", element: <Navigate to="/starter" /> },
       { path: "/starter", exact: true, element: <Starter /> },
       { path: "/about", exact: true, element: <About /> },
       { path: "/users", exact: true, children:[
@@ -41,8 +52,10 @@ const ThemeRoutes = [
       
       { path: "/tags", exact: true,children:[
         {path:'',element:<TagDetails />},
-        { path: "scan", exact: true, element: <ScanDone/> },
-        { path: "register:tagId", exact: true, element: <TagRegister/> }
+        { path: "scan/:tagId", exact: true, element: <ScanDone/> },
+        { path: "register/:tagId", exact: true, element: <TagRegister/> },
+        { path: "register/:tagId", exact: true, element: <TagRegister/> },
+        { path: "completeDetail", exact: true, element: <TagDetailsList></TagDetailsList> }
       ] },
       // { path: "/alerts", exact: true, element: <Alerts /> },
       // { path: "/badges", exact: true, element: <Badges /> },

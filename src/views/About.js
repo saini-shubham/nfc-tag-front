@@ -82,54 +82,55 @@ const About = () => {
     },
   ];
   return (
-    <Row> 
-      <Col>
-        {/* --------------------------------------------------------------------------------*/}
-        {/* Card-1*/}
-        {/* --------------------------------------------------------------------------------*/}
-        <ComponentCard
-          title="Xtreme React Admin Pro Version"
-          subtitle={
-            <p>
-              5 premium and highly customizable demo variations included in the package, with React
-              Router 6, Redux Toolkit, Axios nd much more...
-            </p>
-          }
-        >
+    <h1>Coming soon</h1>
+    // <Row> 
+    //   <Col>
+    //     {/* --------------------------------------------------------------------------------*/}
+    //     {/* Card-1*/}
+    //     {/* --------------------------------------------------------------------------------*/}
+    //     <ComponentCard
+    //       title="Xtreme React Admin Pro Version"
+    //       subtitle={
+    //         <p>
+    //           5 premium and highly customizable demo variations included in the package, with React
+    //           Router 6, Redux Toolkit, Axios nd much more...
+    //         </p>
+    //       }
+    //     >
           
-          <Row>
-            <Col lg="8">
-              <div className="mt-3">
-                <Button
-                  color="primary"
-                  href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
-                  target="_blank"
-                >
-                  Buy Now
-                </Button>
-              </div>
-            </Col>
+    //       <Row>
+    //         <Col lg="8">
+    //           <div className="mt-3">
+    //             <Button
+    //               color="primary"
+    //               href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
+    //               target="_blank"
+    //             >
+    //               Buy Now
+    //             </Button>
+    //           </div>
+    //         </Col>
             
-          </Row>
-        </ComponentCard>
-        <ComponentCard title="Features">
-          <Row>
-            {features.map((feature) => (
-              <Col lg="4" className="mb-5 pb-3" key={feature.title}>
-                <div>
-                  <i className={`bi ${feature.icon} text-primary fs-2`} />
+    //       </Row>
+    //     </ComponentCard>
+    //     <ComponentCard title="Features">
+    //       <Row>
+    //         {features.map((feature) => (
+    //           <Col lg="4" className="mb-5 pb-3" key={feature.title}>
+    //             <div>
+    //               <i className={`bi ${feature.icon} text-primary fs-2`} />
 
-                  <CardTitle tag="h4" className="my-3">
-                    {feature.title}
-                  </CardTitle>
-                  <CardSubtitle className="text-muted col-10">{feature.desc}</CardSubtitle>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        </ComponentCard>
-      </Col>
-    </Row>
+    //               <CardTitle tag="h4" className="my-3">
+    //                 {feature.title}
+    //               </CardTitle>
+    //               <CardSubtitle className="text-muted col-10">{feature.desc}</CardSubtitle>
+    //             </div>
+    //           </Col>
+    //         ))}
+    //       </Row>
+    //     </ComponentCard>
+    //   </Col>
+    // </Row>
   );
 };
 

@@ -1,29 +1,37 @@
-
 import React, { useState } from "react";
 import { TextField, Button, Grid, Typography } from "@material-ui/core";
-import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+} from "@material-ui/core";
 import ComponentCard from "./ComponentCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import tagServices from "../services/tagServices";
+import Swal from "sweetalert2";
 const TagRegister = (props) => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const {tagId }= useParams()
- // const[tagID,setTagId]=useState();
+  const { tagId } = useParams();
+  // const[tagID,setTagId]=useState();
   const [formData, setFormData] = useState({
     tagId: tagId,
-    userId: "",
+    userId: "default",
     name: "",
     houseNo: "",
     phoneNo: "",
     locality: "",
     city: "",
     state: "",
-    pincode: "",
+    pincode: "0000000",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value)
+    console.log(name, value);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -33,15 +41,44 @@ const TagRegister = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault(); // Perform form submission or further processing here
     console.log(formData);
+    tagServices
+      .tagRegister(formData)
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          icon: res.data.message === "Already Registerd" ? "error" : "success",
+          title: res.data.message,
+        });
+        setFormData({
+          tagId: "",
+          userId: "",
+          name: "",
+          houseNo: "",
+          phoneNo: "",
+          locality: "",
+          city: "",
+          state: "",
+          pincode: "",
+        });
+        navigate('/starter')
+        
+      })
+      .catch((err) => {
+        console.log(err.response.data.errors);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Enter Correct Details",
+        });
+      });
   };
-  
+
   return (
     <>
-    <ComponentCard title="Form Details">
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        
-        {/* <Grid item xs={6}>
+      <ComponentCard title="Form Details">
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            {/* <Grid item xs={6}>
           <TextField
             name="tagId"
             label="Tag ID"
@@ -63,52 +100,52 @@ const TagRegister = (props) => {
             required
           />
         </Grid> */}
-        <Grid item xs={12}>
-          <TextField
-            name="name"
-            label="Name"
-            variant="outlined"
-            fullWidth
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            name="houseNo"
-            label="House No"
-            variant="outlined"
-            fullWidth
-            value={formData.houseNo}
-            onChange={handleChange}
-            required
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            name="phoneNo"
-            label="Phone No"
-            variant="outlined"
-            fullWidth
-            value={formData.phoneNo}
-            onChange={handleChange}
-            required
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            name="locality"
-            label="Locality"
-            variant="outlined"
-            fullWidth
-            value={formData.locality}
-            onChange={handleChange}
-            required
-          />
-        </Grid>
-        <Grid item xs={6}>
-          {/* <TextField
+            <Grid item xs={12}>
+              <TextField
+                name="name"
+                label="Name"
+                variant="outlined"
+                fullWidth
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="houseNo"
+                label="House No"
+                variant="outlined"
+                fullWidth
+                value={formData.houseNo}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                name="phoneNo"
+                label="Phone No"
+                variant="outlined"
+                fullWidth
+                value={formData.phoneNo}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                name="locality"
+                label="Locality"
+                variant="outlined"
+                fullWidth
+                value={formData.locality}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              {/* <TextField
             name="city"
             label="City"
             variant="outlined"
@@ -117,28 +154,33 @@ const TagRegister = (props) => {
             onChange={handleChange}
             required
           /> */}
-          <FormControl fullWidth required>
-            <InputLabel fullWidth>City</InputLabel>
-            {/* <Select value={city} onChange={(e) => setCity(e.target.value)}> */}
-            <Select name = "city" fullWidth value={formData.city} onChange={handleChange}>
-              <MenuItem  value="city1">City 1</MenuItem>
-              <MenuItem value="city2">City 2</MenuItem>
-              <MenuItem value="city3">City 3</MenuItem>
-            </Select>
-            <FormHelperText>Select your city</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            name="state"
-            label="State"
-            variant="outlined"
-            fullWidth
-            value={formData.state}
-            onChange={handleChange}
-          />
-        </Grid>
-        {/* <Grid item xs={6}>
+              <FormControl fullWidth required>
+                <InputLabel fullWidth>City</InputLabel>
+                {/* <Select value={city} onChange={(e) => setCity(e.target.value)}> */}
+                <Select
+                  name="city"
+                  fullWidth
+                  value={formData.city}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Hisar">Hisar</MenuItem>
+                  <MenuItem value="Sirsa">Sirsa</MenuItem>
+                  <MenuItem value="Delhi">Delhi</MenuItem>
+                </Select>
+                <FormHelperText>Select your city</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                name="state"
+                label="State"
+                variant="outlined"
+                fullWidth
+                value={formData.state}
+                onChange={handleChange}
+              />
+            </Grid>
+            {/* <Grid item xs={6}>
           <TextField
             name="pincode"
             label="Pincode"
@@ -148,14 +190,14 @@ const TagRegister = (props) => {
             onChange={handleChange}
           />
         </Grid> */}
-        <Grid item xs={12}>
-          <Button type="submit" variant="contained" color="primary">
-                       Submit
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
-    </ComponentCard>
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="primary">
+                           Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </ComponentCard>
     </>
   );
 };

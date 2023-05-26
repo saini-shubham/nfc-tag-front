@@ -80,7 +80,7 @@ const Header = () => {
             </DropdownMenu>
           </UncontrolledDropdown> */}
         </Nav>
-        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="primary">
             <img
               src={user1}
@@ -91,14 +91,14 @@ const Header = () => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
+            {/* <DropdownItem>My Account</DropdownItem>
+            <DropdownItem>Edit Profile</DropdownItem> */}
             <DropdownItem divider />
-            <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
+            {/* <DropdownItem>My Balance</DropdownItem>
+            <DropdownItem>Inbox</DropdownItem> */}
             <DropdownItem>Logout</DropdownItem>
           </DropdownMenu>
-        </Dropdown> */}
+        </Dropdown>
       </Collapse>
     </Navbar>
   );

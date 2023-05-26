@@ -101,8 +101,6 @@ const UserDetails = () => {
             <div className="mt-3">
               <Button
                 color="primary"
-                //href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
-                //target="_blank"
                 onClick={()=>navigate('/users/createUser')}
               >
                 Create User

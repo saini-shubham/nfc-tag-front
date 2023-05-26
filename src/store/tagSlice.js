@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState ={tagId:"",tagScanStatus:false}
+const initialState ={tagId:"",tagScanStatus:false,tagListRequiredDetails:{}}
 const tagSlice= createSlice({
     name:"tag",
     initialState,
@@ -10,6 +10,9 @@ const tagSlice= createSlice({
         },
         setTagScanStatus(state,action){
             state.tagScanStatus=action.payload
+        },
+        setTagDetailsRequiredDetails(state,action){
+            state.tagListRequiredDetails=action.payload
         }
     }
 
