@@ -26,7 +26,7 @@ const getListOfUsers = () => {
 
 //delete a user
 const deleteUser = (userId) => {
-  return axios.delete(base_url + userId, header);
+  return axios.delete(base_url + "/users/"+userId, header);
 };
 
 export default {

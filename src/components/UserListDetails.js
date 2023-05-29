@@ -1,16 +1,18 @@
 import { Col, Row } from "reactstrap";
 import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 //import DeleteIcon from '@mui/icons-material/Delete';
 import ProjectTables from "./dashboard/ProjectTable";
 import { useEffect, useState } from "react";
 import userServices from "../services/userServices";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import user1 from "../assets/images/users/user1.jpg";
 import user2 from "../assets/images/users/user2.jpg";
 import user3 from "../assets/images/users/user3.jpg";
 import user4 from "../assets/images/users/user4.jpg";
 import user5 from "../assets/images/users/user5.jpg";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const tableData = [
   {
@@ -61,6 +63,7 @@ const tableData = [
 ];
 
 const UserListDetails = () => {
+  const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState();
   useEffect(() => {
     userServices
@@ -72,9 +75,40 @@ const UserListDetails = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-const deleteHandler=()=>{
-  console.log("delete clicked")
-}
+
+  const deleteHandler = (data) => () => {
+    console.log("HI");
+    //sadmin can't be deleted
+    if (data === "sadmin") {
+      Swal.fire({
+        icon: "warn",
+        title: "Sorry",
+      });
+    } else {
+      console.log(data);
+      userServices
+        .deleteUser(data)
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            title: res.data.message,
+            //text:  "SS"
+          }).then(() => {
+            userServices
+              .getListOfUsers()
+              .then((res) => {
+                console.log(res.data);
+                //res.data.map((item)=>console.log(item))
+                setUserDetails(res.data);
+              })
+              .catch((err) => console.log(err));
+          });
+          console.log(res);
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
   return (
     <>
       <Row>
@@ -127,13 +161,20 @@ const deleteHandler=()=>{
                       <td>{tdata.adhaarNumber}</td>
                       <td>{tdata.city}</td>
                       <td>{tdata.password}</td>
-                      {/* <td>
+                      <td>
                         {
-                          <IconButton onClick={deleteHandler} aria-label="delete">
-                            <DeleteIcon/>
+                          <IconButton
+                            onClick={deleteHandler(tdata.userId)}
+                            aria-label="delete"
+                            // onClick={() => {
+                            //   //sadmin can't be delted
+                            //   console.log(tdata.userId);
+                            // }}
+                          >
+                            <DeleteIcon />
                           </IconButton>
                         }
-                      </td> */}
+                      </td>
                       {/* <td>
                         {tdata.status === "pending" ? (
                           <span className="p-2 bg-danger rounded-circle d-inline-block ms-3"></span>

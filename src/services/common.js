@@ -1,3 +1,5 @@
+//import {redirect, useNavigate} from 'react-router-dom'
+//const navigate = useNavigate()
 export function getAuthToken(){
     const token = sessionStorage.getItem('token')
     return token;
@@ -8,3 +10,8 @@ export function getUserType(){
     return userType;
 }
 
+
+// export function logout(){
+//     sessionStorage.clear();
+//     return redirect('/')
+// }

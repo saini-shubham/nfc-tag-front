@@ -144,6 +144,7 @@ const CreateUser = () => {
                 <MenuItem value="admin">Admin</MenuItem>
                 <MenuItem value="tagger">Tagger</MenuItem>
                 <MenuItem value="scanner">Scanner</MenuItem>
+                <MenuItem value="visitor">Visitor</MenuItem>
               </Select>
             </FormControl>
           </Grid>

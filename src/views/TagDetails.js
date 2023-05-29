@@ -213,7 +213,7 @@ const tagListHandler=()=>{
                   color="primary"
                   disabled
                 >
-                  List of Users
+                  List of Registered Tags
                 </Button>
               </div>
             </Col>

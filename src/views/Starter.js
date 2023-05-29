@@ -29,6 +29,7 @@ import { ActionsContext } from "../context";
 import { getUserType } from "../services/common";
 import tagServices from "../services/tagServices";
 import ComponentCard2 from "../components/ComponentCard2";
+import Swal from "sweetalert2";
 const BlogData = [
   {
     image: bg1,
@@ -66,7 +67,7 @@ const BlogData = [
 
 const Starter = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [city, setCity] = useState();
+  const [city, setCity] = useState("");
   const [date, setDate] = useState(dayjs());
   const userType = getUserType();
   const navigate = useNavigate();
@@ -93,21 +94,35 @@ const Starter = () => {
 
   //post request for visitor tag count
   useEffect(() => {
-    const date = new Date(selectedDate).toLocaleDateString();
-    const body = {
-      date,
-      cityName: city,
-    };
-    console.log(body);
-    tagServices
-      .getTagStatusForVisitor(body)
-      .then((res) => {
-        console.log(res.data);
-        setTagScanStatus((prevState)=>{
-          return{...prevState,total:res.data.totalTags,scanned:res.data.scannedTags,left:res.data.notScanned}
+    if (city !== "") {
+      const date = new Date(selectedDate).toLocaleDateString();
+      const body = {
+        date,
+        cityName: city,
+      };
+      console.log(body);
+      tagServices
+        .getTagStatusForVisitor(body)
+        .then((res) => {
+          console.log(res.data);
+          setTagScanStatus((prevState) => {
+            return {
+              ...prevState,
+              total: res.data.totalTags,
+              scanned: res.data.scannedTags,
+              left: res.data.notScanned,
+            };
+          });
         })
-      })
-      .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: err.response.data.message,
+          });
+        });
+    }
   }, [selectedDate, city]);
 
   const citChangeHandler = (e) => {

@@ -25,7 +25,7 @@ const scanTag = (tagId) => {
 
 //for visitor:  tag count by given city and date(default current date)
 const getTagStatusForVisitor = (body) => {
-  return axios.post(base_url + "/tags/count", body, header);
+  return axios.post(base_url + "/tags/count",body, header);
 };
 
 ///for admin || sAdmin: get all tags in a city

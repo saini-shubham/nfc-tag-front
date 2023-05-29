@@ -14,33 +14,30 @@ const Scan = () => {
   const userType = getUserType()
   
   const scan = useCallback(async () => {
-    setActions({
-      scan: 'scanned',
-      write: null
-  });
-    // if ('NDEFReader' in window) {
-    //     try {
-    //         const ndef = new window.NDEFReader();
-    //         await ndef.scan();
+  
+    if ('NDEFReader' in window) {
+        try {
+            const ndef = new window.NDEFReader();
+            await ndef.scan();
 
-    //         console.log("Scan started successfully.");
-    //         ndef.onreadingerror = () => {
-    //             console.log("Cannot read data from the NFC tag. Try another one?");
-    //         };
+            console.log("Scan started successfully.");
+            ndef.onreadingerror = () => {
+                console.log("Cannot read data from the NFC tag. Try another one?");
+            };
 
-    //         ndef.onreading = event => {
-    //             console.log("NDEF message read.");
-    //             onReading(event);
-    //             setActions({
-    //                 scan: 'scanned',
-    //                 write: null
-    //             });
-    //         };
+            ndef.onreading = event => {
+                console.log("NDEF message read.");
+                onReading(event);
+                setActions({
+                    scan: 'scanned',
+                    write: null
+                });
+            };
 
-    //     } catch(error){
-    //         console.log(`Error! Scan failed to start: ${error}.`);
-    //     };
-    // }
+        } catch(error){
+            console.log(`Error! Scan failed to start: ${error}.`);
+        };
+    }
   }, [setActions]);
   const navigate = useNavigate();
   const onReading = ({ message, tagId }) => {
