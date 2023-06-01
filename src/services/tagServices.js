@@ -13,7 +13,7 @@ const header = {
   },
 };
 
-const base_url = "http://35.154.112.108";
+const base_url = "http://43.205.254.36";
 
 const tagRegister = (body) => {
   return axios.post(base_url + "/tagRegister", body, header);

@@ -52,7 +52,7 @@ const Login = () => {
     try {
       const response = await fetch(
         // base_url +":7218/Authentication/Login",
-        "http://35.154.112.108/login",
+        "http://43.205.254.36/login",
         {
           method: "POST",
           body: JSON.stringify(details),
