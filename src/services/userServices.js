@@ -13,7 +13,7 @@ const header = {
   },
 };
 
-const base_url = "http://3.6.117.172";
+const base_url = "http://35.154.112.108";
 
 const createUser = (body) => {
   return axios.post(base_url + "/createUser", body, header);
