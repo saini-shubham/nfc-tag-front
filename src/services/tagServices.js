@@ -5,6 +5,7 @@ import { getAuthToken } from "./common";
 const token = getAuthToken();
 
 const header = {
+  
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
