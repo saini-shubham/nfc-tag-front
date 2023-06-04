@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import store from '../src/store/index'
 ReactDOM.render(
   <Suspense fallback={<Loader />}>
-    <HashRouter>
+    <HashRouter basename="/">
     <Provider store={store}>
       <App />
       </Provider>
