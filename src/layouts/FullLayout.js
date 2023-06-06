@@ -13,7 +13,10 @@ const FullLayout = () => {
         </aside>
         {/********Content Area**********/}
 
-        <div className="contentArea" style={{overflowY:"scroll", overflowX:"hidden"}}>
+        <div
+          className="contentArea"
+          //style={{ overflowY: "scroll", overflowX: "hidden" }}
+        >
           {/********header**********/}
           <Header />
           {/********Middle Content**********/}
