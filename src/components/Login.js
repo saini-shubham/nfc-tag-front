@@ -54,7 +54,7 @@ const Login = () => {
         // base_url +":7218/Authentication/Login",
         //"http://43.205.254.36/login",
         //"https://nfc-backend-compass-5b3f.vercel.app",
-        "https://www.accessservices.site",
+        "https://accessservices.site/login",
         {
           method: "POST",
           body: JSON.stringify(details),
