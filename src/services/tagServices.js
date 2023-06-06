@@ -14,7 +14,9 @@ const header = {
   },
 };
 
-const base_url = "http://43.205.254.36";
+//const base_url = "http://43.205.254.36";
+//const base_url = "https://nfc-backend-compass-5b3f.vercel.app";
+const base_url = "https://www.accessservices.site";
 
 const tagRegister = (body) => {
   return axios.post(base_url + "/tagRegister", body, header);
