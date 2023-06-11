@@ -12,7 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import tagServices from "../services/tagServices";
 import Swal from "sweetalert2";
-
+//import { common } from "@material-ui/core/colors";
+import {getUserId} from '../services/common'
 
 const TagRegister = (props) => {
   const navigate = useNavigate()
@@ -20,9 +21,10 @@ const TagRegister = (props) => {
   const parmas = useParams();
   // const[tagID,setTagId]=useState();
   const tagId = parmas.tagId
+  const userId=  getUserId();
   const [formData, setFormData] = useState({
     tagId: tagId,
-    userId: "default",
+    userId: userId,
     name: "",
     houseNo: "",
     phoneNo: "",
@@ -104,7 +106,6 @@ const TagRegister = (props) => {
           />
         </Grid> */}
             <Grid item xs={12}>
-            <input placeholder={tagId}></input>
               <TextField
                 name="name"
                 label="Name"

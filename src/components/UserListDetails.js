@@ -139,7 +139,7 @@ const UserListDetails = () => {
                 </thead>
                 <tbody>
                   {userDetails?.map((tdata, index) => (
-                    <tr key={index} className="border-top">
+                    tdata.userType !== "superAdmin" && <tr key={index} className="border-top">
                       <td>
                         <div className="d-flex align-items-center p-2">
                           {/* <img

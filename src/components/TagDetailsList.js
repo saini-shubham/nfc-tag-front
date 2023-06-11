@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 //import DeleteIcon from "@mui/icons-material/Delete";
 import { Navigate, useNavigate } from "react-router-dom";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-const TagDetailsList = () => {
+const TagDetailsList = (props) => {
   const [tableData, setTableData] = useState();
   const body = useSelector((state) => state.tagDetails.tagListRequiredDetails);
   const columns = [
@@ -68,6 +68,15 @@ const TagDetailsList = () => {
     //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     // },
   ];
+  const currentDate = new Date();
+const day = currentDate.getDate();
+const month = currentDate.getMonth() + 1; // Months are zero-based
+const year = currentDate.getFullYear();
+
+// Format the date as D/M/YYYY
+const formattedDate = day + '/' + month + '/' + year;
+
+//console.log(formattedDate);
   const navigate = useNavigate();
   useEffect(() => {
     console.log(body);
@@ -138,6 +147,7 @@ const TagDetailsList = () => {
                   <th>City</th>
                   <th>Status</th>
                   <th>Time</th>
+                  <th>Scanned By</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -169,11 +179,13 @@ const TagDetailsList = () => {
                       )}
                     </td>
                     <td>{tdata.time}</td>
+                    <td>{tdata.userId}</td>
                     <td>
                       {
                         <IconButton
                           //onClick={deleteHandler}
                           aria-label="delete"
+                          disabled ={body.date !== formattedDate}
                           // onClick={() => {
 
                           //   console.log(tdata.tagId);

@@ -93,6 +93,25 @@ const Starter = () => {
     }
   }, [selectedDate, city]);
 
+  // useEffect(() => {
+  //   console.log(body);
+  //   tagServices
+  //     .getTagStatusCompleteDetails(body)
+  //     .then((res) => {
+  //       console.log(res);
+  //       if (res.status === 404) alert(res.message);
+  //       else setTableData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response.data);
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error",
+  //         text: err.response.data.message,
+  //       }).then(() => navigate(-1));
+  //     });
+  // }, [body]);
+
   const citChangeHandler = (e) => {
     setCity(e.target.value);
   };

@@ -9,6 +9,7 @@ import ScanDone from "../components/ScanDone.js";
 import Login from "../components/Login.js";
 import TagDetailsList from "../components/TagDetailsList.js";
 import { getUserType } from "../services/common.js";
+import RegisteredTagsDetails from "../components/RegisteredTagsDetails.js";
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
@@ -73,6 +74,7 @@ const ThemeRoutes = [
           { path: "scan/:tagId", exact: true, element: <ScanDone /> },
           { path: "register/:tagId", exact: true, element: <TagRegister /> },
           { path: "register/:tagId", exact: true, element: <TagRegister /> },
+          { path: "registeredInCity/:city", exact: true, element: <RegisteredTagsDetails /> },
           {
             path: "completeDetail",
             exact: true,

@@ -22,9 +22,9 @@ const ScanDone = () => {
         console.log(res.data);
         Swal.fire({
           icon:
-            res.data.message === "Already Scanned Today" ? "info" : "success",
-          title: "Success" + tagId.tagId,
-          text: res.data.message,
+            res.data.message === "Scanned Successfully" ? "success" : "info",
+          title: res.data.message,
+          //text: res.data.message,
         }).then(() => navigate("/starter"));
       })
       //.catch((err) => console.log(err));
@@ -34,17 +34,10 @@ const ScanDone = () => {
   }, []);
   return (
     <>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        size="sm"
-        //dialogClassName="modal-90w"
-        scrollable={true}
-        //fullscreen={true}
-      >
-        <Modal.Header closeButton>
+      {/* <Modal show={show} onHide={handleClose} size="sm" scrollable={true}>
+        <Modal.Header closeButton> */}
           {/* <Modal.Title>Done</Modal.Title> */}
-        </Modal.Header>
+        {/* </Modal.Header> */}
         {/* <Modal.Body>
           <h2>Scanned successfully</h2>
         </Modal.Body> */}
@@ -53,7 +46,7 @@ const ScanDone = () => {
             Close
           </Button>
         </Modal.Footer> */}
-      </Modal>
+       {/* </Modal> */}
     </>
   );
 };

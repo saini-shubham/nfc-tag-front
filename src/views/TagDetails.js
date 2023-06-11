@@ -14,7 +14,7 @@ import tagServices from "../services/tagServices";
 import { useDispatch, useSelector } from "react-redux";
 import { tagAction } from "../store/tagSlice";
 import { useNavigate } from "react-router-dom";
-import moment from 'moment'
+import moment from "moment";
 const TagDetails = () => {
   const features = [
     {
@@ -93,8 +93,8 @@ const TagDetails = () => {
       icon: "bi-person-check",
     },
   ];
-  const dispatch= useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [city, setCity] = useState();
   const citChangeHandler = (e) => {
@@ -113,7 +113,7 @@ const TagDetails = () => {
 
     // Allow only the past 3 days
     const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 3);
+    pastDate.setDate(pastDate.getDate() - 10);
     if (nDate < pastDate) return true;
 
     return false;
@@ -123,25 +123,27 @@ const TagDetails = () => {
   };
   const today = dayjs();
 
- 
-const tagListHandler=()=>{
-  //console.log("!!",selectedDate,city)
-  const date = new Date(selectedDate).toLocaleDateString();
-  const data ={
-    city,
-    date:moment(date,'M/D/YYYY').format('D/M/YYYY')
-  }
-  //console.log("!!",data)
-  dispatch(tagAction.setTagDetailsRequiredDetails(data))
-  navigate('/tags/completeDetail')
-  
-}
+  const tagListHandler = () => {
+    //console.log("!!",selectedDate,city)
+    const date = new Date(selectedDate).toLocaleDateString();
+    const data = {
+      city,
+      date: moment(date, "M/D/YYYY").format("D/M/YYYY"),
+    };
+    //console.log("!!",data)
+    dispatch(tagAction.setTagDetailsRequiredDetails(data));
+    navigate("/tags/completeDetail");
+  };
+
+  const registeredTagHandler = () => {
+    navigate("/tags/registeredInCity/" + city);
+  };
 
   return (
     <Row>
       <Col sm="6" lg="6">
         <ComponentCard
-          title="drop down for date and city name"
+          title="Live Status"
           // subtitle={
           //   <p>
           //     5 premium and highly customizable demo variations included in the package, with React
@@ -156,7 +158,7 @@ const tagListHandler=()=>{
                   City
                 </InputLabel>
                 <Select
-                required
+                  required
                   labelId="city"
                   id="city"
                   value={city}
@@ -187,10 +189,7 @@ const tagListHandler=()=>{
           <Row>
             <Col lg="8">
               <div className="mt-3">
-                <Button
-                  color="primary"
-                  onClick={tagListHandler}
-                >
+                <Button color="primary" onClick={tagListHandler}>
                   Tag List
                 </Button>
               </div>
@@ -199,26 +198,46 @@ const tagListHandler=()=>{
         </ComponentCard>
       </Col>
       <Col sm="6" lg="6">
-        <ComponentCard
-          title="Xtreme React Admin Pro Version"
-          // subtitle={
-          //   <p>
-          //     5 premium and highly customizable demo variations included in the package, with React
-          //     Router 6, Redux Toolkit, Axios nd much more...
-          //   </p>
-          // }
-        >
+        <ComponentCard title="All Registered Tags">
           <Row>
-            <Col lg="8">
-              <div className="mt-3">
-                <Button
-                  color="primary"
-                  disabled
-                >
-                  List of Registered Tags
-                </Button>
-              </div>
-            </Col>
+            <Row>
+              <Col>
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <FormControl sx={{ marginBottom: 1, minWidth: "100%" }}>
+                      <InputLabel id="demo-simple-select-autowidth-label">
+                        City
+                      </InputLabel>
+                      <Select
+                        required
+                        labelId="city"
+                        id="city"
+                        value={city}
+                        onChange={citChangeHandler}
+                        autoWidth
+                        label="City"
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="Hisar">Hisar</MenuItem>
+                        <MenuItem value="Sirsa">Sirsa</MenuItem>
+                        <MenuItem value="Delhi">Delhi</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="8">
+                <div className="mt-3">
+                  <Button color="primary" onClick={registeredTagHandler}>
+                    List of Registered Tags
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           </Row>
         </ComponentCard>
       </Col>

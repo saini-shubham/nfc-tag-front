@@ -48,7 +48,8 @@ const CreateUser = () => {
   };
 
   const handleSubmit = (e) => {
-   // e.preventDefault(); // Perform form submission or validation logic here // You can access the form values using the state variables (name, adhaarNumber, firmName, selectedCities, phoneNumber, userType)
+    
+   e.preventDefault(); // Perform form submission or validation logic here // You can access the form values using the state variables (name, adhaarNumber, firmName, selectedCities, phoneNumber, userType)
     // console.log("Form submitted:", {
     //   name,
     //   adhaarNumber,
@@ -75,7 +76,7 @@ const CreateUser = () => {
         });
       }).catch((err)=>
       //console.log(err.response.data)
-      Swal.fire("Adhar/Phone must be numbers")
+      Swal.fire("Adhar/Phone not valid")
       )
   };
 
