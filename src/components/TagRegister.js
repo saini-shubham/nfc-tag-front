@@ -12,11 +12,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import tagServices from "../services/tagServices";
 import Swal from "sweetalert2";
+
+
 const TagRegister = (props) => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { tagId } = useParams();
+  const parmas = useParams();
   // const[tagID,setTagId]=useState();
+  const tagId = parmas.tagId
   const [formData, setFormData] = useState({
     tagId: tagId,
     userId: "default",
@@ -40,7 +43,7 @@ const TagRegister = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Perform form submission or further processing here
-    console.log(formData);
+    //console.log(formData);
     tagServices
       .tagRegister(formData)
       .then((res) => {
@@ -101,6 +104,7 @@ const TagRegister = (props) => {
           />
         </Grid> */}
             <Grid item xs={12}>
+            <input placeholder={tagId}></input>
               <TextField
                 name="name"
                 label="Name"

@@ -8,7 +8,7 @@ import UserListDetails from "../components/UserListDetails.js";
 import ScanDone from "../components/ScanDone.js";
 import Login from "../components/Login.js";
 import TagDetailsList from "../components/TagDetailsList.js";
-import {getUserType} from "../services/common.js";
+import { getUserType } from "../services/common.js";
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
@@ -62,7 +62,10 @@ const ThemeRoutes = [
         ],
       },
 
-      (userType === "admin" || userType === "superAdmin") && {
+      (userType === "admin" ||
+        userType === "superAdmin" ||
+        userType === "tagger" ||
+        userType === "scanner") && {
         path: "/tags",
         exact: true,
         children: [

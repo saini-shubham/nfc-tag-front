@@ -5,42 +5,42 @@ import ScanDone from "./ScanDone";
 import TagRegister from "./TagRegister";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import {getUserType} from '../services/common'
+import { getUserType } from "../services/common";
 const Scan = () => {
   const [message, setMessage] = useState("");
-  const [tagId, setTagId] = useState("111");
+  const navigate = useNavigate();
+  const [tagId, setTagId] = useState();
   const { actions, setActions } = useContext(ActionsContext);
   //const [userType, setUserType] = useState("scanner");
-  const userType = getUserType()
-  
+  const userType = getUserType();
+
   const scan = useCallback(async () => {
-  
-    if ('NDEFReader' in window) {
-        try {
-            const ndef = new window.NDEFReader();
-            await ndef.scan();
+    if ("NDEFReader" in window) {
+      try {
+        const ndef = new window.NDEFReader();
+        await ndef.scan();
 
-            console.log("Scan started successfully.");
-            ndef.onreadingerror = () => {
-                console.log("Cannot read data from the NFC tag. Try another one?");
-            };
-
-            ndef.onreading = event => {
-                console.log("NDEF message read.");
-                onReading(event);
-                setActions({
-                    scan: 'scanned',
-                    write: null
-                });
-            };
-
-        } catch(error){
-            console.log(`Error! Scan failed to start: ${error}.`);
+        console.log("Scan started successfully.");
+        ndef.onreadingerror = () => {
+          console.log("Cannot read data from the NFC tag. Try another one?");
         };
+
+        ndef.onreading = (event) => {
+          console.log("NDEF message read.");
+          onReading(event);
+          setActions({
+            scan: "scanned",
+            write: null,
+          });
+        };
+      } catch (error) {
+        console.log(`Error! Scan failed to start: ${error}.`);
+      }
     }
   }, [setActions]);
-  const navigate = useNavigate();
+
   const onReading = ({ message, tagId }) => {
+   // alert(tagId)
     setTagId(tagId);
     for (const record of message.records) {
       switch (record.recordType) {
@@ -67,11 +67,10 @@ const Scan = () => {
       {actions.scan === "scanned" ? (
         //  <TagRegister tagId={tagId}></TagRegister>
         <div>
-          {/* <p>Serial Number: {tagId}</p> */}
-          {userType === "scanner" && navigate('/tags/scan/'+tagId)}
-          {userType === "tagger" && navigate('/tags/register/'+tagId)}
-          {userType === "admin" && navigate('/tags/register/'+tagId)}
-          {userType === "superAdmin" && navigate('/tags/register/'+tagId)}
+          {userType === "scanner" && navigate("/tags/scan/" + tagId)}
+          {userType === "tagger" && navigate("/tags/register/" + tagId)}
+          {userType === "admin" && navigate("/tags/register/" + tagId)}
+          {userType === "superAdmin" && navigate("/tags/register/" + tagId)}
           {/* <p>Message: {message}</p> */}
         </div>
       ) : (

@@ -9,6 +9,12 @@ export function getUserType(){
     const userType = sessionStorage.getItem('userType')
     return userType;
 }
+export function getUserId(){
+    const userType = sessionStorage.getItem('userId')
+    return userType;
+}
+
+
 
 
 // export function logout(){

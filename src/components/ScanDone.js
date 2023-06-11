@@ -15,18 +15,22 @@ const ScanDone = () => {
     navigate("/starter");
   };
   useEffect(() => {
-    console.log(tagId)
+    console.log(tagId);
     tagServices
       .scanTag(tagId.tagId)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         Swal.fire({
-          icon: res.data.message=== "Already Scanned Today"? "info":"success",
-          title: "success",
-          text:  res.data.message
-        }).then(()=>navigate("/starter"))
+          icon:
+            res.data.message === "Already Scanned Today" ? "info" : "success",
+          title: "Success" + tagId.tagId,
+          text: res.data.message,
+        }).then(() => navigate("/starter"));
       })
-      .catch((err) => console.log(err));
+      //.catch((err) => console.log(err));
+      .catch((err) =>
+        Swal.fire({ icon: "error", title: err.data, text: err.data.message })
+      );
   }, []);
   return (
     <>
@@ -39,7 +43,7 @@ const ScanDone = () => {
         //fullscreen={true}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Done</Modal.Title>
+          {/* <Modal.Title>Done</Modal.Title> */}
         </Modal.Header>
         {/* <Modal.Body>
           <h2>Scanned successfully</h2>

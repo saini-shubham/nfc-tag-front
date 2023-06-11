@@ -30,40 +30,7 @@ import { getUserType } from "../services/common";
 import tagServices from "../services/tagServices";
 import ComponentCard2 from "../components/ComponentCard2";
 import Swal from "sweetalert2";
-const BlogData = [
-  {
-    image: bg1,
-    title: "This is simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg2,
-    title: "Lets be simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg3,
-    title: "Don't Lamp blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg4,
-    title: "Simple is beautiful",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-];
+import moment from 'moment'
 
 const Starter = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
@@ -96,8 +63,9 @@ const Starter = () => {
   useEffect(() => {
     if (city !== "") {
       const date = new Date(selectedDate).toLocaleDateString();
+      const formattedDate = moment(date,'M/D/YYYY').format('D/M/YYYY');
       const body = {
-        date,
+        date:formattedDate,
         cityName: city,
       };
       console.log(body);
@@ -141,7 +109,7 @@ const Starter = () => {
 
     // Allow only the past 3 days
     const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 3);
+    pastDate.setDate(pastDate.getDate() - 7);
     if (nDate < pastDate) return true;
 
     return false;
@@ -150,6 +118,7 @@ const Starter = () => {
   //  const CustomDatePicker = () => {
 
   const handleDateChange = (date) => {
+    console.log("!!",date)
     setSelectedDate(date);
   };
   return (

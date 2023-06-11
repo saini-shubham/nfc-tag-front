@@ -14,7 +14,7 @@ import tagServices from "../services/tagServices";
 import { useDispatch, useSelector } from "react-redux";
 import { tagAction } from "../store/tagSlice";
 import { useNavigate } from "react-router-dom";
-
+import moment from 'moment'
 const TagDetails = () => {
   const features = [
     {
@@ -125,12 +125,13 @@ const TagDetails = () => {
 
  
 const tagListHandler=()=>{
-  console.log(selectedDate,city)
+  //console.log("!!",selectedDate,city)
   const date = new Date(selectedDate).toLocaleDateString();
   const data ={
     city,
-    date
+    date:moment(date,'M/D/YYYY').format('D/M/YYYY')
   }
+  //console.log("!!",data)
   dispatch(tagAction.setTagDetailsRequiredDetails(data))
   navigate('/tags/completeDetail')
   
@@ -179,6 +180,7 @@ const tagListHandler=()=>{
                 renderInput={(props) => <TextField {...props} />}
                 disableFuture
                 shouldDisableDate={disableDates}
+                inputFormat="D/M/YYYY"
               />
             </LocalizationProvider>
           </Grid>
