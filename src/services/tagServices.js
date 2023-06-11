@@ -1,11 +1,9 @@
 import axios from "axios";
-
 import { getAuthToken } from "./common";
 
 const token = getAuthToken();
 
-const header = {
-  
+const header = {  
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -28,12 +26,12 @@ const scanTag = (tagId) => {
 
 //for visitor:  tag count by given city and date(default current date)
 const getTagStatusForVisitor = (body) => {
-  return axios.post(base_url + "/tags/count",body, header);
+  return axios.post(base_url + "/tags/count", body, header);
 };
 
 ///for admin || sAdmin: get all tags in a city
 const getAllRegiteredTagsInACity = (cityName) => {
-  return axios.get(base_url + "/tags/byCity?city=" + cityName, header);
+  return axios.get(base_url + "/tags/byCity/" + cityName, header);
 };
 
 //for admin: tag status complete details for a given date and city
