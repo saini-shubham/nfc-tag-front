@@ -65,7 +65,7 @@ const Starter = () => {
     if (city !== "") {
       //const date = new Date(selectedDate).toLocaleDateString();
       //const formattedDate = moment(date, 'M/D/YYYY').format('D/M/YYYY');
-      const formattedDate =dayjs(selectedDate).format('M/D/YYYY')
+      const formattedDate =dayjs(selectedDate).format('D/M/YYYY')
       setDate(formattedDate)
       const body = {
         date: formattedDate,
