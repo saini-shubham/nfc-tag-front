@@ -14,61 +14,6 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 const TagDetailsList = (props) => {
   const [tableData, setTableData] = useState();
   const body = useSelector((state) => state.tagDetails.tagListRequiredDetails);
-  const columns = [
-    //  { field: 'id', headerName: 'ID', width: 90 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "houseNo",
-      headerName: "House No",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "locality",
-      headerName: "Locality",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "scanned",
-      headerName: "Status",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "time",
-      headerName: "Time",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 110,
-      editable: true,
-    },
-
-    // {
-    //   field: 'fullName',
-    //   headerName: 'Full name',
-    //   description: 'This column has a value getter and is not sortable.',
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    // },
-  ];
   const currentDate = new Date();
 const day = currentDate.getDate();
 const month = currentDate.getMonth() + 1; // Months are zero-based

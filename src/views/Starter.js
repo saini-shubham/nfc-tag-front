@@ -35,9 +35,10 @@ import moment from 'moment'
 const Starter = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [city, setCity] = useState("");
+  const [userCity, setUserCity] = useState([]);
   //const [date, setDate] = useState(dayjs());
   const [date, setDate] = useState();
-  const userType = getUserType();
+  //const userType = getUserType();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [tagScanStatus, setTagScanStatus] = useState(false);
@@ -46,6 +47,13 @@ const Starter = () => {
   const [actions, setActions] = useState(null);
   const { scan, write } = actions || {};
   const actionsValue = { actions, setActions };
+  const[userType,setUserType] = useState()
+  const showMobilemenu = () => {
+    document.getElementById("sidebarArea").classList.toggle("showSidebar");
+  };
+  useEffect(()=>{
+    setUserType(getUserType())
+    },[])
   const onHandleAction = (actions) => {
     setActions({ ...actions });
   };
@@ -59,6 +67,13 @@ const Starter = () => {
     console.log(tagStatus);
     setTagScanStatus(tagStatus);
   }, [tagStatus]);
+
+  //bind user city 
+  useEffect(()=>{
+    const userCity = sessionStorage.getItem('userCity');
+    console.log("!!",userCity)
+    setUserCity(userCity)
+  },[])
 
   //post request for visitor tag count
   useEffect(() => {
@@ -131,7 +146,7 @@ const Starter = () => {
 
     // Allow only the past 3 days
     const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 7);
+    pastDate.setDate(pastDate.getDate() - 30);
     if (nDate < pastDate) return true;
 
     return false;
@@ -143,6 +158,7 @@ const Starter = () => {
     console.log("!!", date)
     setSelectedDate(date);
   };
+
   return (
     <div>
       {/***Top Cards***/}
@@ -271,6 +287,11 @@ const Starter = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
+                    {/* {
+                      userCity?.map((item)=>(
+                        <MenuItem value={item}>{item}</MenuItem>
+                      ))
+                    } */}
                     <MenuItem value="Hisar">Hisar</MenuItem>
                     <MenuItem value="Sirsa">Sirsa</MenuItem>
                     <MenuItem value="Delhi">Delhi</MenuItem>

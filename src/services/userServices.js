@@ -13,9 +13,9 @@ const header = {
   },
 };
 
-//const base_url = "http://43.205.254.36";
+const base_url = "http://13.234.104.94";
 //const base_url = "https://nfc-backend-compass-5b3f.vercel.app";
-const base_url = "https://accessservices.site";
+//const base_url = "https://accessservices.site";
 
 const createUser = (body) => {
   return axios.post(base_url + "/createUser", body, header);
@@ -30,6 +30,8 @@ const getListOfUsers = () => {
 const deleteUser = (userId) => {
   return axios.delete(base_url + "/users/"+userId, header);
 };
+
+//get cities of an user
 
 export default {
   createUser,

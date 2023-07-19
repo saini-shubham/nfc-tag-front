@@ -51,10 +51,10 @@ const Login = () => {
   const onLogin = useCallback(async (details) => {
     try {
       const response = await fetch(
-        // base_url +":7218/Authentication/Login",
-        //"http://43.205.254.36/login",
+        
+        "http://13.234.104.94/login",
         //"https://nfc-backend-compass-5b3f.vercel.app",
-        "https://accessservices.site/login",
+        //"https://accessservices.site/login",
         {
           method: "POST",
           body: JSON.stringify(details),
@@ -84,6 +84,7 @@ const Login = () => {
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem('userId',data.userId);
         sessionStorage.setItem('userType', data.userType);
+        sessionStorage.setItem('userCity', data.city);
         navigate("/starter");
       }
     } catch (error) {
